@@ -24,7 +24,7 @@ class MouseController: NSObject {
     
     func launchApp() {
         
-        let appName = UserDefaults.standard.string(forKey: "ulApp") ?? ""
+        let appName = UserDefaults.standard.string(forKey: "llApp") ?? ""
         NSWorkspace.shared.launchApplication(appName)
         
         // Other ways to launch applicayion

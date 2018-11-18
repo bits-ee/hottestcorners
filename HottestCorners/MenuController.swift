@@ -17,25 +17,24 @@ class MenuController: NSObject {
         newStatusBarItem.button?.title = "HC" //tobe: newStatusBarItem.button?.image = NSImage(named:NSImage.Name("StatusBarButtonImage"))
         
         let m = NSMenu()
-        let sm = getApplications()
         
         let lbl = NSMenuItem(title: "Hottest Corners", action: nil, keyEquivalent: "")
-            lbl.attributedTitle = NSAttributedString(string: "Run any app in screen corner", attributes: [ NSAttributedString.Key.font: NSFont.systemFont(ofSize: 12.0)])
+            lbl.attributedTitle = NSAttributedString(string: "Speed up access to your apps", attributes: [ NSAttributedString.Key.font: NSFont.systemFont(ofSize: 12.0)])
         
         m.addItem(lbl)
         
-        let ul = NSMenuItem(title: "⤣ Upper Left", action: nil, keyEquivalent: "")
-        m.addItem(ul)
-        
-        m.setSubmenu(sm, for: ul)
-        
+        m.addItem(withTitle: "⤣ Upper Left", action: nil, keyEquivalent: "")
         m.addItem(withTitle: "⤤ Upper Right", action: nil, keyEquivalent: "")
-        m.addItem(withTitle: "⤦ Lower Left", action: nil, keyEquivalent: "")
+        
+        let ll = NSMenuItem(title: "⤦ Lower Left", action: nil, keyEquivalent: "")
+        m.addItem(ll)
+        m.setSubmenu(getApplications(), for: ll)
+        
         m.addItem(withTitle: "⤥ Lower Right", action: nil, keyEquivalent: "")
         
         m.addItem(NSMenuItem.separator())
         
-        let autorun = NSMenuItem(title: "Run on System Startup", action: nil, keyEquivalent: "")
+        let autorun = NSMenuItem(title: "Launch at Startup", action: nil, keyEquivalent: "")
         //todo: set state based on value saved to UserDefaults
         m.addItem(autorun)
         
@@ -49,7 +48,14 @@ class MenuController: NSObject {
     func getApplications() -> NSMenu {
         
         let m = NSMenu()
+        let nothing = NSMenuItem(title: "Do Nothing", action: #selector(clearCorner(_:)), keyEquivalent: "")
+        nothing.target = self //wft? menu items are disables without it
+        m.addItem(nothing)
+        m.addItem(NSMenuItem.separator())
         
+        let selectedApp = UserDefaults.standard.string(forKey: "llApp") ?? nil
+        var hasSelectedApp = false
+
         let dir = FileManager.default.urls(for: .applicationDirectory, in: .localDomainMask)[0] //might have several /Application directories?
         
         let apps = try! FileManager.default.contentsOfDirectory(at: dir, includingPropertiesForKeys: [], options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants]).filter{ $0.pathExtension == "app" }.sorted {a,b in
@@ -59,7 +65,16 @@ class MenuController: NSObject {
             let appName = a.deletingPathExtension().lastPathComponent
             let item = NSMenuItem(title: appName, action: #selector(setApplication(_:)), keyEquivalent: "")
             item.target = self //wft? menu items are disables without it
+            if appName == selectedApp {
+                item.state = NSControl.StateValue.on
+                hasSelectedApp = true
+            }
             m.addItem(item)
+        }
+        
+        if !hasSelectedApp {
+            UserDefaults.standard.set(nil, forKey: "llApp")
+            m.item(at: 0)?.state = NSControl.StateValue.on
         }
         
         return m
@@ -67,14 +82,24 @@ class MenuController: NSObject {
     
     //https://www.bignerdranch.com/blog/hannibal-selector/
     @objc func setApplication(_ sender: NSMenuItem) {
+        
         for i in (sender.parent?.submenu?.items)! {
             i.state = NSControl.StateValue.off
         }
         sender.state = NSControl.StateValue.on
         
-        UserDefaults.standard.set(sender.title, forKey: "ulApp")
+        UserDefaults.standard.set(sender.title, forKey: "llApp")
         
         //print(sender.parent!.title)
         //print(sender.title)
+    }
+    
+    @objc func clearCorner(_ sender: NSMenuItem) {
+        for i in (sender.parent?.submenu?.items)! {
+            i.state = NSControl.StateValue.off
+        }
+        sender.state = NSControl.StateValue.on
+        
+        UserDefaults.standard.set(nil, forKey: "llApp")
     }
 }
