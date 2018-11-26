@@ -1,22 +1,15 @@
 //
 //  main.swift
-//  HottestCorners
+//  HottestCornersHelper
 //
-//  Created by Zahhar Kirillov on 17.11.18.
+//  Created by Zahhar Kirillov on 20.11.18.
 //  Copyright © 2018 Baltic IT Solutions OÜ. All rights reserved.
 //
 
 import Cocoa
 
-struct Corners {
-    static var ll = [NSPoint]()
-    static var ul = [NSPoint]()
-    static var lr = [NSPoint]()
-    static var ur = [NSPoint]()
-}
-
 autoreleasepool {
-    let delegate = AppDelegate()
+    let delegate = HelperAppDelegate()
     // NSApplication delegate is a weak reference,
     // so we have to make sure it's not deallocated.
     // In Objective-C you would use NS_VALID_UNTIL_END_OF_SCOPE

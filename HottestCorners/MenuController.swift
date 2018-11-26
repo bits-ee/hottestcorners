@@ -7,36 +7,44 @@
 //
 
 import Cocoa
+import ServiceManagement
 
 class MenuController: NSObject {
     
     var newStatusBarItem : NSStatusItem! //hard reference - wtf?!
+    let helperBundleName = "ee.bits.HottestCornersHelper"
     
     func populate() {
         newStatusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength) //.squareLength to display icon
         newStatusBarItem.button?.title = "HC" //tobe: newStatusBarItem.button?.image = NSImage(named:NSImage.Name("StatusBarButtonImage"))
         
         let m = NSMenu()
+        let sm = getApplications()
+        let sm2 = getApplications()
+        
         
         let lbl = NSMenuItem(title: "Hottest Corners", action: nil, keyEquivalent: "")
             lbl.attributedTitle = NSAttributedString(string: "Speed up access to your apps", attributes: [ NSAttributedString.Key.font: NSFont.systemFont(ofSize: 12.0)])
-        
         m.addItem(lbl)
         
-        m.addItem(withTitle: "⤣ Upper Left", action: nil, keyEquivalent: "")
-        m.addItem(withTitle: "⤤ Upper Right", action: nil, keyEquivalent: "")
-        
-        let ll = NSMenuItem(title: "⤦ Lower Left", action: nil, keyEquivalent: "")
-        m.addItem(ll)
-        m.setSubmenu(getApplications(), for: ll)
-        
-        m.addItem(withTitle: "⤥ Lower Right", action: nil, keyEquivalent: "")
+        let ul = m.addItem(withTitle: "⤣ Upper Left", action: nil, keyEquivalent: "")
+        m.setSubmenu(sm, for: ul)
+        let ur = m.addItem(withTitle: "⤤ Upper Right", action: nil, keyEquivalent: "")
+        m.setSubmenu(sm2, for: ur)
+        let ll = m.addItem(withTitle: "⤦ Lower Left", action: nil, keyEquivalent: "")
+        //m.setSubmenu(sm.copy() as? NSMenu, for: ll)
+        let lr = m.addItem(withTitle: "⤥ Lower Right", action: nil, keyEquivalent: "")
+        //m.setSubmenu(sm.copy() as? NSMenu, for: lr)
         
         m.addItem(NSMenuItem.separator())
-        
-        let autorun = NSMenuItem(title: "Launch at Startup", action: nil, keyEquivalent: "")
-        //todo: set state based on value saved to UserDefaults
-        m.addItem(autorun)
+
+        let foundHelper = NSWorkspace.shared.runningApplications.contains {
+            $0.bundleIdentifier == helperBundleName
+        }
+
+        let lal = m.addItem(withTitle: "Launch at Login", action: #selector(toggleLaL(_:)), keyEquivalent: "")
+            lal.target = self
+            lal.state = foundHelper ? .on : .off
         
         m.addItem(NSMenuItem.separator())
         
@@ -48,8 +56,9 @@ class MenuController: NSObject {
     func getApplications() -> NSMenu {
         
         let m = NSMenu()
-        let nothing = NSMenuItem(title: "Do Nothing", action: #selector(clearCorner(_:)), keyEquivalent: "")
+        let nothing = NSMenuItem(title: "Do Nothing", action: #selector(setDoNothing(_:)), keyEquivalent: "")
         nothing.target = self //wft? menu items are disables without it
+        nothing.tag = -1 //just a magic number
         m.addItem(nothing)
         m.addItem(NSMenuItem.separator())
         
@@ -80,7 +89,6 @@ class MenuController: NSObject {
         return m
     }
     
-    //https://www.bignerdranch.com/blog/hannibal-selector/
     @objc func setApplication(_ sender: NSMenuItem) {
         
         for i in (sender.parent?.submenu?.items)! {
@@ -90,16 +98,26 @@ class MenuController: NSObject {
         
         UserDefaults.standard.set(sender.title, forKey: "llApp")
         
-        //print(sender.parent!.title)
-        //print(sender.title)
+        print(sender.parent!.title)
+        print(sender.title)
     }
     
-    @objc func clearCorner(_ sender: NSMenuItem) {
+    @objc func setDoNothing(_ sender: NSMenuItem) {
         for i in (sender.parent?.submenu?.items)! {
             i.state = NSControl.StateValue.off
         }
         sender.state = NSControl.StateValue.on
         
         UserDefaults.standard.set(nil, forKey: "llApp")
+    }
+    
+    @objc func toggleLaL(_ sender: NSMenuItem) {
+        if sender.state == NSControl.StateValue.on {
+            SMLoginItemSetEnabled(helperBundleName as CFString, false)
+            sender.state = NSControl.StateValue.off
+        } else {
+            SMLoginItemSetEnabled(helperBundleName as CFString, true)
+            sender.state = NSControl.StateValue.on
+        }
     }
 }

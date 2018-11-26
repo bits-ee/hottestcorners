@@ -13,15 +13,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var mouseEventMonitor: Any?
     var screenEventMonitor: Any?
     
-    let debugMode = true
+    let debug = true
     
     var appMenu = MenuController()
-    lazy var scr = ScreenController(debugMode) //lazy because have to defer till app is loaded
+    //lazy because have to defer till app is loaded
+    lazy var scr = ScreenController(debugMode: debug)
     lazy var mouse = MouseController()
     
     func applicationWillFinishLaunching(_ aNotification: Notification) {
         
+        //print(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String) //version number
+        
         appMenu.populate()
+        scr.getCorners()
         
         mouseEventMonitor = NSEvent.addGlobalMonitorForEvents(matching: [
             NSEvent.EventTypeMask.mouseMoved
@@ -29,11 +33,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         screenEventMonitor = NotificationCenter.default.addObserver(forName: NSApplication.didChangeScreenParametersNotification, object: NSApplication.shared, queue: OperationQueue.main) {
             notification -> Void in
-            self.scr.recalculate()
+            self.scr.getCorners()
         }
         
-        if debugMode {
-            scr.printScreenInfo()
+        if debug {
+            _ = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .localDomainMask, true)
+            //let hcConfig = libraryDir[0] + "/Preferences/com.apple.dock.plist"
+            //let theDict = NSDictionary.init(contentsOfFile: hcConfig)
+            //print(theDict!)
         }
     }
 

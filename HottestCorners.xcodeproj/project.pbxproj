@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A40D347221A4970B00DCD6DD /* HelperAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40D347121A4970B00DCD6DD /* HelperAppDelegate.swift */; };
+		A40D347421A4970D00DCD6DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A40D347321A4970D00DCD6DD /* Assets.xcassets */; };
+		A40D347E21A49A3400DCD6DD /* HottestCornersHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = A40D346F21A4970B00DCD6DD /* HottestCornersHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A40D348121A49C6200DCD6DD /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A40D348021A49C6200DCD6DD /* ServiceManagement.framework */; };
+		A40D348421A49C7E00DCD6DD /* HottestCornersHelper.app in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A40D346F21A4970B00DCD6DD /* HottestCornersHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A40D348621A4A29700DCD6DD /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40D348521A4A29700DCD6DD /* main.swift */; };
 		A4926529219CC6F40087239F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4926528219CC6F40087239F /* AppDelegate.swift */; };
 		A492652B219CC6F50087239F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A492652A219CC6F50087239F /* Assets.xcassets */; };
 		A4F3E4F021A044E900369222 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F3E4EF21A044E900369222 /* main.swift */; };
@@ -15,7 +21,38 @@
 		A4F3E4F621A1C38D00369222 /* MouseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F3E4F521A1C38D00369222 /* MouseController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A40D347D21A49A1400DCD6DD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				A40D347E21A49A3400DCD6DD /* HottestCornersHelper.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A42D15D621A2204B00A16162 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A40D348421A49C7E00DCD6DD /* HottestCornersHelper.app in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		A40D346F21A4970B00DCD6DD /* HottestCornersHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HottestCornersHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A40D347121A4970B00DCD6DD /* HelperAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperAppDelegate.swift; sourceTree = "<group>"; };
+		A40D347321A4970D00DCD6DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A40D347821A4970D00DCD6DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A40D347921A4970D00DCD6DD /* HottestCornersHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HottestCornersHelper.entitlements; sourceTree = "<group>"; };
+		A40D348021A49C6200DCD6DD /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		A40D348521A4A29700DCD6DD /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A4926525219CC6F40087239F /* HottestCorners.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HottestCorners.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4926528219CC6F40087239F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A492652A219CC6F50087239F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -28,21 +65,51 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A4926522219CC6F40087239F /* Frameworks */ = {
+		A40D346C21A4970B00DCD6DD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A4926522219CC6F40087239F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A40D348121A49C6200DCD6DD /* ServiceManagement.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A40D347021A4970B00DCD6DD /* HottestCornersHelper */ = {
+			isa = PBXGroup;
+			children = (
+				A40D347121A4970B00DCD6DD /* HelperAppDelegate.swift */,
+				A40D347321A4970D00DCD6DD /* Assets.xcassets */,
+				A40D347821A4970D00DCD6DD /* Info.plist */,
+				A40D347921A4970D00DCD6DD /* HottestCornersHelper.entitlements */,
+				A40D348521A4A29700DCD6DD /* main.swift */,
+			);
+			path = HottestCornersHelper;
+			sourceTree = "<group>";
+		};
+		A40D347F21A49C6200DCD6DD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A40D348021A49C6200DCD6DD /* ServiceManagement.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A492651C219CC6F40087239F = {
 			isa = PBXGroup;
 			children = (
 				A4926527219CC6F40087239F /* HottestCorners */,
+				A40D347021A4970B00DCD6DD /* HottestCornersHelper */,
 				A4926526219CC6F40087239F /* Products */,
+				A40D347F21A49C6200DCD6DD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -50,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				A4926525219CC6F40087239F /* HottestCorners.app */,
+				A40D346F21A4970B00DCD6DD /* HottestCornersHelper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,13 +140,32 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A40D346E21A4970B00DCD6DD /* HottestCornersHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A40D347A21A4970D00DCD6DD /* Build configuration list for PBXNativeTarget "HottestCornersHelper" */;
+			buildPhases = (
+				A40D346B21A4970B00DCD6DD /* Sources */,
+				A40D346C21A4970B00DCD6DD /* Frameworks */,
+				A40D346D21A4970B00DCD6DD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HottestCornersHelper;
+			productName = HottestCornersHelper;
+			productReference = A40D346F21A4970B00DCD6DD /* HottestCornersHelper.app */;
+			productType = "com.apple.product-type.application";
+		};
 		A4926524219CC6F40087239F /* HottestCorners */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A4926533219CC6F50087239F /* Build configuration list for PBXNativeTarget "HottestCorners" */;
 			buildPhases = (
 				A4926521219CC6F40087239F /* Sources */,
-				A4926522219CC6F40087239F /* Frameworks */,
 				A4926523219CC6F40087239F /* Resources */,
+				A40D347D21A49A1400DCD6DD /* CopyFiles */,
+				A4926522219CC6F40087239F /* Frameworks */,
+				A42D15D621A2204B00A16162 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -99,6 +186,9 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Baltic IT Solutions OÜ";
 				TargetAttributes = {
+					A40D346E21A4970B00DCD6DD = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					A4926524219CC6F40087239F = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -118,11 +208,20 @@
 			projectRoot = "";
 			targets = (
 				A4926524219CC6F40087239F /* HottestCorners */,
+				A40D346E21A4970B00DCD6DD /* HottestCornersHelper */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A40D346D21A4970B00DCD6DD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A40D347421A4970D00DCD6DD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A4926523219CC6F40087239F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -134,6 +233,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A40D346B21A4970B00DCD6DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A40D348621A4A29700DCD6DD /* main.swift in Sources */,
+				A40D347221A4970B00DCD6DD /* HelperAppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A4926521219CC6F40087239F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -149,6 +257,55 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		A40D347B21A4970D00DCD6DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HottestCornersHelper/HottestCornersHelper.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89RC5Y523P;
+				INFOPLIST_FILE = HottestCornersHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.bits.HottestCornersHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_ENABLE_BATCH_MODE = NO;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		A40D347C21A4970D00DCD6DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HottestCornersHelper/HottestCornersHelper.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89RC5Y523P;
+				INFOPLIST_FILE = HottestCornersHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.bits.HottestCornersHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_ENABLE_BATCH_MODE = NO;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 		A4926531219CC6F50087239F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -269,8 +426,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HottestCorners/HottestCorners.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89RC5Y523P;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = HottestCorners/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -278,6 +441,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ee.bits.HottestCorners;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -287,8 +452,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HottestCorners/HottestCorners.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89RC5Y523P;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = HottestCorners/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -296,6 +467,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ee.bits.HottestCorners;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
@@ -303,6 +476,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A40D347A21A4970D00DCD6DD /* Build configuration list for PBXNativeTarget "HottestCornersHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A40D347B21A4970D00DCD6DD /* Debug */,
+				A40D347C21A4970D00DCD6DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A4926520219CC6F40087239F /* Build configuration list for PBXProject "HottestCorners" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
