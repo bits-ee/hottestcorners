@@ -1,25 +1,32 @@
 //
-//  ScreenController.swift
+//  Corners.swift
 //  HottestCorners
 //
-//  Created by Zahhar Kirillov on 18.11.18.
+//  Created by Zahhar Kirillov on 28.11.18.
 //  Copyright © 2018 Baltic IT Solutions OÜ. All rights reserved.
 //
 
 import Cocoa
 
-class ScreenController: NSObject {
+class Corners {
+    //singleton pattern
+    static let shared = Corners()
+    private init(){ get() }
     
-    var debugMode: Bool
+    var lowerLeft = [NSPoint]()
+    var upperRight = [NSPoint]()
+    var lowerRight = [NSPoint]()
+    var upperLeft = [NSPoint]()
     
-    init(debugMode: Bool) { //_ is used to supress need for label name when calling
-        self.debugMode = debugMode
-    }
+    let llApp = UserDefaults.standard.string(forKey: "llApp") ?? nil
+    let lrApp = UserDefaults.standard.string(forKey: "lrApp") ?? nil
+    let ulApp = UserDefaults.standard.string(forKey: "ulApp") ?? nil
+    let urApp = UserDefaults.standard.string(forKey: "urlApp") ?? nil
     
-    func getCorners() {
+    func get() -> Void {
         for s in NSScreen.screens {
-            //if self.debugMode { printScreenInfo(scr: s) }
-        
+            //self.printScreenInfo(scr: s)
+            
             let ll = NSPoint(x: Int(s.frame.minX), y: Int(s.frame.minY))
             let ul = NSPoint(x: Int(s.frame.minX), y: Int(s.frame.maxY))
             let lr = NSPoint(x: Int(s.frame.maxX), y: Int(s.frame.minY))
@@ -32,7 +39,7 @@ class ScreenController: NSObject {
             for s2 in NSScreen.screens {
                 //checking lower left corner
                 if(NSPointInRect(NSPoint(x: ll.x, y: ll.y-1), s2.frame) ||
-                   NSPointInRect(NSPoint(x: ll.x-1, y: ll.y), s2.frame)) {
+                    NSPointInRect(NSPoint(x: ll.x-1, y: ll.y), s2.frame)) {
                     llIsFalseCorner = true
                 }
                 
@@ -55,18 +62,16 @@ class ScreenController: NSObject {
                 }
             }
             
-            if !ulIsFalseCorner { Corners.ul.append(ul) }
-            if !llIsFalseCorner { Corners.ll.append(ll) }
-            if !lrIsFalseCorner { Corners.lr.append(lr) }
-            if !urIsFalseCorner { Corners.ur.append(ur) }
+            if !ulIsFalseCorner { upperLeft.append(ul) }
+            if !llIsFalseCorner { lowerLeft.append(ll) }
+            if !lrIsFalseCorner { lowerRight.append(lr) }
+            if !urIsFalseCorner { upperRight.append(ur) }
         }
         
-        if(self.debugMode) {
-            print("Upper left corners: \(Corners.ul)")
-            print("Lower left corners: \(Corners.ll)")
-            print("Lower right corners: \(Corners.lr)")
-            print("Upper right corners: \(Corners.ur)")
-        }
+        log(string: "Upper left corners: \(upperLeft)")
+        log(string: "Lower left corners: \(lowerLeft)")
+        log(string: "Lower right corners: \(lowerRight)")
+        log(string: "Upper right corners: \(upperRight)")
     }
     
     func printScreenInfo(scr: NSScreen) {
@@ -77,5 +82,13 @@ class ScreenController: NSObject {
         print(scr.frame.maxY)
         print(scr.frame.minX)
         print(scr.frame.minY)
+    }
+    
+    func log(string: String ) {
+        // conditional compiling, expects debug flag set to -DDEBUG
+        //u nder Project—>Build settings-> Other Swift Flags
+        #if DEBUG
+            debugPrint(string)
+        #endif
     }
 }

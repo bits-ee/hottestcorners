@@ -13,11 +13,11 @@
 		A40D348121A49C6200DCD6DD /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A40D348021A49C6200DCD6DD /* ServiceManagement.framework */; };
 		A40D348421A49C7E00DCD6DD /* HottestCornersHelper.app in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A40D346F21A4970B00DCD6DD /* HottestCornersHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A40D348621A4A29700DCD6DD /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40D348521A4A29700DCD6DD /* main.swift */; };
+		A42B255B21AF1808002D882F /* Corners.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42B255A21AF1808002D882F /* Corners.swift */; };
 		A4926529219CC6F40087239F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4926528219CC6F40087239F /* AppDelegate.swift */; };
 		A492652B219CC6F50087239F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A492652A219CC6F50087239F /* Assets.xcassets */; };
 		A4F3E4F021A044E900369222 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F3E4EF21A044E900369222 /* main.swift */; };
 		A4F3E4F221A1B1AD00369222 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F3E4F121A1B1AD00369222 /* MenuController.swift */; };
-		A4F3E4F421A1B74C00369222 /* ScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F3E4F321A1B74C00369222 /* ScreenController.swift */; };
 		A4F3E4F621A1C38D00369222 /* MouseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F3E4F521A1C38D00369222 /* MouseController.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +53,7 @@
 		A40D347921A4970D00DCD6DD /* HottestCornersHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HottestCornersHelper.entitlements; sourceTree = "<group>"; };
 		A40D348021A49C6200DCD6DD /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		A40D348521A4A29700DCD6DD /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		A42B255A21AF1808002D882F /* Corners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Corners.swift; sourceTree = "<group>"; };
 		A4926525219CC6F40087239F /* HottestCorners.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HottestCorners.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4926528219CC6F40087239F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A492652A219CC6F50087239F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,7 +61,6 @@
 		A4926530219CC6F50087239F /* HottestCorners.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HottestCorners.entitlements; sourceTree = "<group>"; };
 		A4F3E4EF21A044E900369222 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A4F3E4F121A1B1AD00369222 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
-		A4F3E4F321A1B74C00369222 /* ScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenController.swift; sourceTree = "<group>"; };
 		A4F3E4F521A1C38D00369222 /* MouseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MouseController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,12 +127,12 @@
 			children = (
 				A4926528219CC6F40087239F /* AppDelegate.swift */,
 				A4F3E4F521A1C38D00369222 /* MouseController.swift */,
-				A4F3E4F321A1B74C00369222 /* ScreenController.swift */,
 				A4F3E4F121A1B1AD00369222 /* MenuController.swift */,
 				A492652A219CC6F50087239F /* Assets.xcassets */,
 				A492652F219CC6F50087239F /* Info.plist */,
 				A4926530219CC6F50087239F /* HottestCorners.entitlements */,
 				A4F3E4EF21A044E900369222 /* main.swift */,
+				A42B255A21AF1808002D882F /* Corners.swift */,
 			);
 			path = HottestCorners;
 			sourceTree = "<group>";
@@ -248,8 +248,8 @@
 			files = (
 				A4F3E4F021A044E900369222 /* main.swift in Sources */,
 				A4F3E4F621A1C38D00369222 /* MouseController.swift in Sources */,
-				A4F3E4F421A1B74C00369222 /* ScreenController.swift in Sources */,
 				A4F3E4F221A1B1AD00369222 /* MenuController.swift in Sources */,
+				A42B255B21AF1808002D882F /* Corners.swift in Sources */,
 				A4926529219CC6F40087239F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,6 +361,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

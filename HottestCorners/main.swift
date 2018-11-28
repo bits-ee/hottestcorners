@@ -8,13 +8,6 @@
 
 import Cocoa
 
-struct Corners {
-    static var ll = [NSPoint]()
-    static var ul = [NSPoint]()
-    static var lr = [NSPoint]()
-    static var ur = [NSPoint]()
-}
-
 autoreleasepool {
     let delegate = AppDelegate()
     // NSApplication delegate is a weak reference,

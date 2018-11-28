@@ -19,22 +19,26 @@ class MenuController: NSObject {
         newStatusBarItem.button?.title = "HC" //tobe: newStatusBarItem.button?.image = NSImage(named:NSImage.Name("StatusBarButtonImage"))
         
         let m = NSMenu()
-        let sm = getApplications()
-        let sm2 = getApplications()
-        
-        
+
         let lbl = NSMenuItem(title: "Hottest Corners", action: nil, keyEquivalent: "")
             lbl.attributedTitle = NSAttributedString(string: "Speed up access to your apps", attributes: [ NSAttributedString.Key.font: NSFont.systemFont(ofSize: 12.0)])
         m.addItem(lbl)
+
+        let ll = m.addItem(withTitle: "⤦ Lower Left", action: nil, keyEquivalent: "")
+        ll.tag = 1
+        m.setSubmenu(getApplications(cornerKey: "llApp"), for: ll)
         
         let ul = m.addItem(withTitle: "⤣ Upper Left", action: nil, keyEquivalent: "")
-        m.setSubmenu(sm, for: ul)
+        ul.tag = 2
+        m.setSubmenu(getApplications(cornerKey: "ulApp"), for: ul)
+        
         let ur = m.addItem(withTitle: "⤤ Upper Right", action: nil, keyEquivalent: "")
-        m.setSubmenu(sm2, for: ur)
-        let ll = m.addItem(withTitle: "⤦ Lower Left", action: nil, keyEquivalent: "")
-        //m.setSubmenu(sm.copy() as? NSMenu, for: ll)
+        ur.tag = 3
+        m.setSubmenu(getApplications(cornerKey: "urApp"), for: ur)
+
         let lr = m.addItem(withTitle: "⤥ Lower Right", action: nil, keyEquivalent: "")
-        //m.setSubmenu(sm.copy() as? NSMenu, for: lr)
+        lr.tag = 4
+        m.setSubmenu(getApplications(cornerKey: "lrApp"), for: lr)
         
         m.addItem(NSMenuItem.separator())
 
@@ -53,7 +57,7 @@ class MenuController: NSObject {
         newStatusBarItem.menu = m
     }
     
-    func getApplications() -> NSMenu {
+    func getApplications(cornerKey: String) -> NSMenu {
         
         let m = NSMenu()
         let nothing = NSMenuItem(title: "Do Nothing", action: #selector(setDoNothing(_:)), keyEquivalent: "")
@@ -62,7 +66,7 @@ class MenuController: NSObject {
         m.addItem(nothing)
         m.addItem(NSMenuItem.separator())
         
-        let selectedApp = UserDefaults.standard.string(forKey: "llApp") ?? nil
+        let selectedApp = UserDefaults.standard.string(forKey: cornerKey) ?? nil
         var hasSelectedApp = false
 
         let dir = FileManager.default.urls(for: .applicationDirectory, in: .localDomainMask)[0] //might have several /Application directories?
@@ -82,7 +86,7 @@ class MenuController: NSObject {
         }
         
         if !hasSelectedApp {
-            UserDefaults.standard.set(nil, forKey: "llApp")
+            UserDefaults.standard.set(nil, forKey: cornerKey)
             m.item(at: 0)?.state = NSControl.StateValue.on
         }
         
@@ -96,10 +100,19 @@ class MenuController: NSObject {
         }
         sender.state = NSControl.StateValue.on
         
-        UserDefaults.standard.set(sender.title, forKey: "llApp")
-        
-        print(sender.parent!.title)
-        print(sender.title)
+        switch sender.parent!.tag {
+        case 1:
+            UserDefaults.standard.set(sender.title, forKey: "llApp")
+        case 2:
+            UserDefaults.standard.set(sender.title, forKey: "ulApp")
+        case 3:
+            UserDefaults.standard.set(sender.title, forKey: "urApp")
+        case 4:
+            UserDefaults.standard.set(sender.title, forKey: "lrApp")
+        default:
+            //FIXME, should be never called, but cannot be omitted
+            UserDefaults.standard.set(sender.title, forKey: "err")
+        }
     }
     
     @objc func setDoNothing(_ sender: NSMenuItem) {
@@ -108,7 +121,19 @@ class MenuController: NSObject {
         }
         sender.state = NSControl.StateValue.on
         
-        UserDefaults.standard.set(nil, forKey: "llApp")
+        switch sender.parent!.tag {
+        case 1:
+            UserDefaults.standard.set(nil, forKey: "llApp")
+        case 2:
+            UserDefaults.standard.set(nil, forKey: "ulApp")
+        case 3:
+            UserDefaults.standard.set(nil, forKey: "urApp")
+        case 4:
+            UserDefaults.standard.set(nil, forKey: "lrApp")
+        default:
+            //FIXME, should be never called, but cannot be omitted
+            UserDefaults.standard.set(nil, forKey: "err")
+        }
     }
     
     @objc func toggleLaL(_ sender: NSMenuItem) {

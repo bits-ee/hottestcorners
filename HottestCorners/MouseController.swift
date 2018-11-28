@@ -20,40 +20,40 @@ class MouseController: NSObject {
         //print(String(format: "%.0f, %.0f", mouse.x, mouse.y)) //print mouse coordinates realtime
         
         //check if mouse is in lower left corner
-        for ll in Corners.ll {
+        for ll in Corners.shared.lowerLeft {
             if isNear(mouse: mouse, target: ll) {
-                launchApp(corner: "llApp")
+                launchApp(cornerKey: "llApp")
                 return
             }
         }
         
         //check if mouse is in lower right corner
-        for lr in Corners.lr {
+        for lr in Corners.shared.lowerRight {
             if isNear(mouse: mouse, target: lr) {
-                launchApp(corner: "lrApp")
+                launchApp(cornerKey: "lrApp")
                 return
             }
         }
         
         //check if mouse is in upper left corner
-        for ul in Corners.ul {
+        for ul in Corners.shared.upperLeft {
             if isNear(mouse: mouse, target: ul) {
-                launchApp(corner: "ulApp")
+                launchApp(cornerKey: "ulApp")
                 return
             }
         }
 
         //check if mouse is in upper right corner
-        for ur in Corners.ur {
+        for ur in Corners.shared.upperRight {
             if isNear(mouse: mouse, target: ur) {
-                launchApp(corner: "urApp")
+                launchApp(cornerKey: "urApp")
                 return
             }
         }
     }
     
-    func launchApp(corner: String) {
-        let appName = UserDefaults.standard.string(forKey: corner) ?? ""
+    func launchApp(cornerKey: String) {
+        let appName = UserDefaults.standard.string(forKey: cornerKey) ?? ""
         NSWorkspace.shared.launchApplication(appName)
         
         // Other ways to launch applicayion
