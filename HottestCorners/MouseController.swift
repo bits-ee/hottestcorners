@@ -11,7 +11,7 @@ import Cocoa
 class MouseController: NSObject {
     
     func isNear(mouse: NSPoint, target: NSPoint) -> Bool {
-        let tolerance: CGFloat = 5 //pixels
+        let tolerance: CGFloat = 2 //pixels
         return ((pow((mouse.x - target.x), 2) + pow((mouse.y - target.y), 2)).squareRoot() < tolerance)
     }
     
@@ -20,41 +20,51 @@ class MouseController: NSObject {
         //print(String(format: "%.0f, %.0f", mouse.x, mouse.y)) //print mouse coordinates realtime
         
         //check if mouse is in lower left corner
-        for ll in Corners.shared.lowerLeft {
-            if isNear(mouse: mouse, target: ll) {
-                launchApp(cornerKey: "llApp")
-                return
+        if (Corners.shared.llApp() != nil) {
+            for ll in Corners.shared.lowerLeft {
+                if isNear(mouse: mouse, target: ll) {
+                    launchApp(cornerKey: "llApp")
+                    return
+                }
             }
         }
         
         //check if mouse is in lower right corner
-        for lr in Corners.shared.lowerRight {
-            if isNear(mouse: mouse, target: lr) {
-                launchApp(cornerKey: "lrApp")
-                return
+        if (Corners.shared.lrApp() != nil) {
+            for lr in Corners.shared.lowerRight {
+                if isNear(mouse: mouse, target: lr) {
+                    launchApp(cornerKey: "lrApp")
+                    return
+                }
             }
         }
-        
+
         //check if mouse is in upper left corner
-        for ul in Corners.shared.upperLeft {
-            if isNear(mouse: mouse, target: ul) {
-                launchApp(cornerKey: "ulApp")
-                return
+        if (Corners.shared.ulApp() != nil) {
+            for ul in Corners.shared.upperLeft {
+                if isNear(mouse: mouse, target: ul) {
+                    launchApp(cornerKey: "ulApp")
+                    return
+                }
             }
         }
 
         //check if mouse is in upper right corner
-        for ur in Corners.shared.upperRight {
-            if isNear(mouse: mouse, target: ur) {
-                launchApp(cornerKey: "urApp")
-                return
+        if (Corners.shared.urApp() != nil) {
+            for ur in Corners.shared.upperRight {
+                if isNear(mouse: mouse, target: ur) {
+                    launchApp(cornerKey: "urApp")
+                    return
+                }
             }
         }
     }
     
     func launchApp(cornerKey: String) {
-        let appName = UserDefaults.standard.string(forKey: cornerKey) ?? ""
-        NSWorkspace.shared.launchApplication(appName)
+        if !UserDefaults.standard.bool(forKey: "isPaused") {
+            let appName = UserDefaults.standard.string(forKey: cornerKey) ?? ""
+            NSWorkspace.shared.launchApplication(appName)
+        }
         
         // Other ways to launch applicayion
         // by bundler identifier:

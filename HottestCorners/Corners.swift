@@ -11,21 +11,45 @@ import Cocoa
 class Corners {
     //singleton pattern
     static let shared = Corners()
-    private init(){ get() }
+    private init() { getCoordinates(); }
     
     var lowerLeft = [NSPoint]()
     var upperRight = [NSPoint]()
     var lowerRight = [NSPoint]()
     var upperLeft = [NSPoint]()
     
-    let llApp = UserDefaults.standard.string(forKey: "llApp") ?? nil
-    let lrApp = UserDefaults.standard.string(forKey: "lrApp") ?? nil
-    let ulApp = UserDefaults.standard.string(forKey: "ulApp") ?? nil
-    let urApp = UserDefaults.standard.string(forKey: "urlApp") ?? nil
+    func isPaused() -> Bool {
+        return UserDefaults.standard.bool(forKey: "isPaused")
+    }
     
-    func get() -> Void {
+    func getApp(cornerKey: String) -> String? {
+        return UserDefaults.standard.string(forKey: cornerKey) ?? nil
+    }
+    
+    func llApp() -> String? {
+        return getApp(cornerKey: "llApp")
+    }
+    
+    func lrApp() -> String? {
+        return getApp(cornerKey: "lrApp")
+    }
+    
+    func ulApp() -> String? {
+        return getApp(cornerKey: "ulApp")
+    }
+    
+    func urApp() -> String? {
+        return getApp(cornerKey: "urApp")
+    }
+    
+    func getCoordinates() -> Void {
+        lowerLeft = [NSPoint]()
+        upperRight = [NSPoint]()
+        lowerRight = [NSPoint]()
+        upperLeft = [NSPoint]()
+        
         for s in NSScreen.screens {
-            //self.printScreenInfo(scr: s)
+            self.printScreenInfo(scr: s)
             
             let ll = NSPoint(x: Int(s.frame.minX), y: Int(s.frame.minY))
             let ul = NSPoint(x: Int(s.frame.minX), y: Int(s.frame.maxY))
@@ -75,18 +99,20 @@ class Corners {
     }
     
     func printScreenInfo(scr: NSScreen) {
-        print("Screen \(scr.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! NSNumber) info")
-        print(scr.frame.height)
-        print(scr.frame.width)
-        print(scr.frame.maxX)
-        print(scr.frame.maxY)
-        print(scr.frame.minX)
-        print(scr.frame.minY)
+        #if DEBUG
+            print("Screen \(scr.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! NSNumber) info")
+            print(scr.frame.height)
+            print(scr.frame.width)
+            print(scr.frame.maxX)
+            print(scr.frame.maxY)
+            print(scr.frame.minX)
+            print(scr.frame.minY)
+        #endif
     }
     
     func log(string: String ) {
         // conditional compiling, expects debug flag set to -DDEBUG
-        //u nder Project—>Build settings-> Other Swift Flags
+        // under Project—>Build settings-> Other Swift Flags
         #if DEBUG
             debugPrint(string)
         #endif

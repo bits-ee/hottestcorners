@@ -16,7 +16,8 @@ class MenuController: NSObject {
     
     func populate() {
         newStatusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength) //.squareLength to display icon
-        newStatusBarItem.button?.title = "HC" //tobe: newStatusBarItem.button?.image = NSImage(named:NSImage.Name("StatusBarButtonImage"))
+        newStatusBarItem.button?.title = "HC" //without icon
+        setAppStatusIcon()
         
         let m = NSMenu()
 
@@ -41,6 +42,22 @@ class MenuController: NSObject {
         m.setSubmenu(getApplications(cornerKey: "lrApp"), for: lr)
         
         m.addItem(NSMenuItem.separator())
+        
+        let p = m.addItem(withTitle: "Pause", action: #selector(togglePause(_:)), keyEquivalent: "")
+            p.target = self
+        
+        let isPaused = UserDefaults.standard.bool(forKey: "isPaused")
+        if (isPaused) {
+            p.state = NSControl.StateValue.on
+            newStatusBarItem.button?.image = NSImage(named:"StatusIconPaused")
+            newStatusBarItem.button?.alternateImage = NSImage(named: "StatusIconPausedSelected")
+        } else {
+            p.state = NSControl.StateValue.off
+            newStatusBarItem.button?.image = NSImage(named:"StatusIcon")
+            newStatusBarItem.button?.alternateImage = NSImage(named: "StatusIconSelected")
+        }
+        
+        m.addItem(NSMenuItem.separator())
 
         let foundHelper = NSWorkspace.shared.runningApplications.contains {
             $0.bundleIdentifier == helperBundleName
@@ -62,11 +79,11 @@ class MenuController: NSObject {
         let m = NSMenu()
         let nothing = NSMenuItem(title: "Do Nothing", action: #selector(setDoNothing(_:)), keyEquivalent: "")
         nothing.target = self //wft? menu items are disables without it
-        nothing.tag = -1 //just a magic number
+        nothing.tag = -1 //just a magic number encoding "Nothing"
         m.addItem(nothing)
         m.addItem(NSMenuItem.separator())
         
-        let selectedApp = UserDefaults.standard.string(forKey: cornerKey) ?? nil
+        let selectedApp = Corners.shared.getApp(cornerKey: cornerKey)
         var hasSelectedApp = false
 
         let dir = FileManager.default.urls(for: .applicationDirectory, in: .localDomainMask)[0] //might have several /Application directories?
@@ -143,6 +160,28 @@ class MenuController: NSObject {
         } else {
             SMLoginItemSetEnabled(helperBundleName as CFString, true)
             sender.state = NSControl.StateValue.on
+        }
+    }
+    
+    @objc func togglePause(_ sender: NSMenuItem) {
+        if sender.state == NSControl.StateValue.on {
+            UserDefaults.standard.set(false, forKey: "isPaused")
+            sender.state = NSControl.StateValue.off
+            setAppStatusIcon()
+        } else {
+            UserDefaults.standard.set(true, forKey: "isPaused")
+            sender.state = NSControl.StateValue.on
+            setAppStatusIcon(isPaused: true)
+        }
+    }
+    
+    func setAppStatusIcon(isPaused: Bool = false) {
+        if isPaused {
+            newStatusBarItem.button?.image = NSImage(named:"StatusIconPaused")
+            newStatusBarItem.button?.alternateImage = NSImage(named: "StatusIconPausedSelected")
+        } else {
+            newStatusBarItem.button?.image = NSImage(named:"StatusIcon")
+            newStatusBarItem.button?.alternateImage = NSImage(named: "StatusIconSelected")
         }
     }
 }
