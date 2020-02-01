@@ -86,11 +86,21 @@ class MenuController: NSObject {
         let selectedApp = Corners.shared.getApp(cornerKey: cornerKey)
         var hasSelectedApp = false
 
-        let dir = FileManager.default.urls(for: .applicationDirectory, in: .localDomainMask)[0] //might have several /Application directories?
+        //Uncomment to get user app dir
+        //let dir = FileManager.default.urls(for: .applicationDirectory, in: .localDomainMask)[0] //might have several /Application directories?
+       
+        //Gets System dir
+        let dir = FileManager.default.urls(for: .applicationDirectory, in: .systemDomainMask)[0]
         
+        debugPrint(dir)
+        
+        //Gets pps only in the current dir, but skips subdirs, e.g. Utilities or custom user created dirs
         let apps = try! FileManager.default.contentsOfDirectory(at: dir, includingPropertiesForKeys: [], options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants]).filter{ $0.pathExtension == "app" }.sorted {a,b in
             a.absoluteString.lowercased() < b.absoluteString.lowercased() //cannot sort [URL] type, have to stringify first
         }
+        
+        debugPrint(apps)
+        
         for a in apps as [URL] {
             let appName = a.deletingPathExtension().lastPathComponent
             let item = NSMenuItem(title: appName, action: #selector(setApplication(_:)), keyEquivalent: "")
