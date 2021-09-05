@@ -1,69 +1,61 @@
-//
-//  MouseController.swift
-//  HottestCorners
-//
-//  Created by Zahhar Kirillov on 18.11.18.
 //  Copyright © 2018 Baltic IT Solutions OÜ. All rights reserved.
-//
 
 import Cocoa
 
-class MouseController: NSObject {
-    
+final class MouseController {
+
     func isNear(mouse: NSPoint, target: NSPoint) -> Bool {
         let tolerance: CGFloat = 2 //pixels
         return ((pow((mouse.x - target.x), 2) + pow((mouse.y - target.y), 2)).squareRoot() < tolerance)
     }
-    
+
     func checkLocation(_ event: NSEvent) {
         let mouse = NSEvent.mouseLocation
-        //print(String(format: "%.0f, %.0f", mouse.x, mouse.y)) //print mouse coordinates realtime
         
         //check if mouse is in lower left corner
-        if (Corners.shared.llApp() != nil) {
+        if let name = UserDefaults.lowerLeftAppName {
             for ll in Corners.shared.lowerLeft {
                 if isNear(mouse: mouse, target: ll) {
-                    launchApp(cornerKey: "llApp")
+                    launchApp(name: name)
                     return
                 }
             }
         }
         
         //check if mouse is in lower right corner
-        if (Corners.shared.lrApp() != nil) {
+        if let name = UserDefaults.lowerRightAppName {
             for lr in Corners.shared.lowerRight {
                 if isNear(mouse: mouse, target: lr) {
-                    launchApp(cornerKey: "lrApp")
+                    launchApp(name: name)
                     return
                 }
             }
         }
 
         //check if mouse is in upper left corner
-        if (Corners.shared.ulApp() != nil) {
+        if let name = UserDefaults.upperLeftAppName {
             for ul in Corners.shared.upperLeft {
                 if isNear(mouse: mouse, target: ul) {
-                    launchApp(cornerKey: "ulApp")
+                    launchApp(name: name)
                     return
                 }
             }
         }
 
         //check if mouse is in upper right corner
-        if (Corners.shared.urApp() != nil) {
+        if let name = UserDefaults.upperRightAppName {
             for ur in Corners.shared.upperRight {
                 if isNear(mouse: mouse, target: ur) {
-                    launchApp(cornerKey: "urApp")
+                    launchApp(name: name)
                     return
                 }
             }
         }
     }
-    
-    func launchApp(cornerKey: String) {
-        if !UserDefaults.standard.bool(forKey: "isPaused") {
-            let appName = UserDefaults.standard.string(forKey: cornerKey) ?? ""
-            NSWorkspace.shared.launchApplication(appName)
+
+    func launchApp(name: String) {
+        if !UserDefaults.isPaused {
+            NSWorkspace.shared.launchApplication(name)
         }
         
         // Other ways to launch applicayion

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "MainMenu.addLaunchAtLoginItem():MainMenu.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Bundle.main.bundleIdentifier">
+            </PersistentString>
+            <PersistentString
+               value = "NSWorkspace.shared.runningApplications.compactMap({ $0.bundleIdentifier })">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ApplicationsMenu.setApplication(_:):ApplicationsMenu.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sender.title">
+            </PersistentString>
+            <PersistentString
+               value = "MainMenu.CornerType.getType(tag: parentTag)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

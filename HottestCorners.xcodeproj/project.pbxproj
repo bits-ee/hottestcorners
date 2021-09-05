@@ -17,8 +17,12 @@
 		A4926529219CC6F40087239F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4926528219CC6F40087239F /* AppDelegate.swift */; };
 		A492652B219CC6F50087239F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A492652A219CC6F50087239F /* Assets.xcassets */; };
 		A4F3E4F021A044E900369222 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F3E4EF21A044E900369222 /* main.swift */; };
-		A4F3E4F221A1B1AD00369222 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F3E4F121A1B1AD00369222 /* MenuController.swift */; };
 		A4F3E4F621A1C38D00369222 /* MouseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F3E4F521A1C38D00369222 /* MouseController.swift */; };
+		B6AACDCB26E4FD92009CA7B5 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AACDCA26E4FD92009CA7B5 /* UserDefaultsExtension.swift */; };
+		B6AACDD026E54C86009CA7B5 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AACDCF26E54C86009CA7B5 /* MainMenu.swift */; };
+		B6AACDD226E54DE6009CA7B5 /* StatusBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AACDD126E54DE6009CA7B5 /* StatusBarConfigurator.swift */; };
+		B6AACDD426E55013009CA7B5 /* ApplicationsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AACDD326E55013009CA7B5 /* ApplicationsMenu.swift */; };
+		B6AACDD626E55339009CA7B5 /* ApplicationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AACDD526E55339009CA7B5 /* ApplicationsList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,8 +64,12 @@
 		A492652F219CC6F50087239F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4926530219CC6F50087239F /* HottestCorners.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HottestCorners.entitlements; sourceTree = "<group>"; };
 		A4F3E4EF21A044E900369222 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		A4F3E4F121A1B1AD00369222 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		A4F3E4F521A1C38D00369222 /* MouseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MouseController.swift; sourceTree = "<group>"; };
+		B6AACDCA26E4FD92009CA7B5 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		B6AACDCF26E54C86009CA7B5 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		B6AACDD126E54DE6009CA7B5 /* StatusBarConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarConfigurator.swift; sourceTree = "<group>"; };
+		B6AACDD326E55013009CA7B5 /* ApplicationsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationsMenu.swift; sourceTree = "<group>"; };
+		B6AACDD526E55339009CA7B5 /* ApplicationsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationsList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,16 +133,52 @@
 		A4926527219CC6F40087239F /* HottestCorners */ = {
 			isa = PBXGroup;
 			children = (
-				A4926528219CC6F40087239F /* AppDelegate.swift */,
-				A4F3E4F521A1C38D00369222 /* MouseController.swift */,
-				A4F3E4F121A1B1AD00369222 /* MenuController.swift */,
-				A492652A219CC6F50087239F /* Assets.xcassets */,
-				A492652F219CC6F50087239F /* Info.plist */,
-				A4926530219CC6F50087239F /* HottestCorners.entitlements */,
-				A4F3E4EF21A044E900369222 /* main.swift */,
-				A42B255A21AF1808002D882F /* Corners.swift */,
+				B6AACDCC26E50477009CA7B5 /* Source */,
+				B6AACDCD26E504BD009CA7B5 /* Resource */,
+				B6AACDCE26E5050F009CA7B5 /* Configuration */,
 			);
 			path = HottestCorners;
+			sourceTree = "<group>";
+		};
+		B6AACDCC26E50477009CA7B5 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				A4F3E4EF21A044E900369222 /* main.swift */,
+				A4926528219CC6F40087239F /* AppDelegate.swift */,
+				B6AACDD726E55E02009CA7B5 /* Menu */,
+				A4F3E4F521A1C38D00369222 /* MouseController.swift */,
+				B6AACDD126E54DE6009CA7B5 /* StatusBarConfigurator.swift */,
+				B6AACDD526E55339009CA7B5 /* ApplicationsList.swift */,
+				A42B255A21AF1808002D882F /* Corners.swift */,
+				B6AACDCA26E4FD92009CA7B5 /* UserDefaultsExtension.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		B6AACDCD26E504BD009CA7B5 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A492652A219CC6F50087239F /* Assets.xcassets */,
+				A4926530219CC6F50087239F /* HottestCorners.entitlements */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		B6AACDCE26E5050F009CA7B5 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				A492652F219CC6F50087239F /* Info.plist */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		B6AACDD726E55E02009CA7B5 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				B6AACDCF26E54C86009CA7B5 /* MainMenu.swift */,
+				B6AACDD326E55013009CA7B5 /* ApplicationsMenu.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,8 +294,12 @@
 			files = (
 				A4F3E4F021A044E900369222 /* main.swift in Sources */,
 				A4F3E4F621A1C38D00369222 /* MouseController.swift in Sources */,
-				A4F3E4F221A1B1AD00369222 /* MenuController.swift in Sources */,
+				B6AACDD626E55339009CA7B5 /* ApplicationsList.swift in Sources */,
+				B6AACDD226E54DE6009CA7B5 /* StatusBarConfigurator.swift in Sources */,
+				B6AACDD026E54C86009CA7B5 /* MainMenu.swift in Sources */,
 				A42B255B21AF1808002D882F /* Corners.swift in Sources */,
+				B6AACDD426E55013009CA7B5 /* ApplicationsMenu.swift in Sources */,
+				B6AACDCB26E4FD92009CA7B5 /* UserDefaultsExtension.swift in Sources */,
 				A4926529219CC6F40087239F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,7 +485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = HottestCorners/HottestCorners.entitlements;
+				CODE_SIGN_ENTITLEMENTS = HottestCorners/Resource/HottestCorners.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -447,7 +495,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = HottestCorners/Info.plist;
+				INFOPLIST_FILE = HottestCorners/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -465,7 +513,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = HottestCorners/HottestCorners.entitlements;
+				CODE_SIGN_ENTITLEMENTS = HottestCorners/Resource/HottestCorners.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -475,7 +523,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = HottestCorners/Info.plist;
+				INFOPLIST_FILE = HottestCorners/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
