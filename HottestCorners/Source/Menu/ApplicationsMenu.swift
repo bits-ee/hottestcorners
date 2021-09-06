@@ -12,11 +12,15 @@ final class ApplicationsMenu: NSMenu {
         addSeparator()
 
         var selectedNothing = true
-        ApplicationsList.shared.listOfNames.forEach  {
+        ApplicationsList.shared.favoritesAppName.forEach  {
             addApplication(corner: corner, appName: $0)
             if corner.applicationName == $0 { selectedNothing = false }
         }
-        
+        addSeparator()
+        ApplicationsList.shared.otherAppNames.forEach  {
+            addApplication(corner: corner, appName: $0)
+            if corner.applicationName == $0 { selectedNothing = false }
+        }
         if selectedNothing {
             corner.removeApplication()
             item(at: 0)?.state = .on
@@ -135,7 +139,7 @@ private extension MainMenu.CornerType {
         case .lowerLeft:
             UserDefaults.removeLowerLeftAppName()
         case .lowerRight:
-            UserDefaults.removeUpperLeftAppName()
+            UserDefaults.removeLowerRightAppName()
         case .upperLeft:
             UserDefaults.removeUpperLeftAppName()
         case .upperRight:
