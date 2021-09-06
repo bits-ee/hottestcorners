@@ -18,7 +18,7 @@ final class StatusBarConfigurator {
         }
     }
 
-    static func addMenu(_ menu: NSMenu) {
+    static func reloadMenu() {
         item.menu = MainMenu()
     }
 

@@ -80,6 +80,7 @@ private extension ApplicationsMenu {
         sender.state = .on
 
         MainMenu.CornerType.getType(tag: parentTag)?.saveApplication(name: sender.title)
+        StatusBarConfigurator.reloadMenu()
     }
     
     func setDoNothing(_ sender: NSMenuItem) {
@@ -96,13 +97,14 @@ private extension ApplicationsMenu {
         sender.state = .on
 
         MainMenu.CornerType.getType(tag: parentTag)?.removeApplication()
+        StatusBarConfigurator.reloadMenu()
     }
 
 }
 
 // MARK: - Corner type extension
 
-private extension MainMenu.CornerType {
+extension MainMenu.CornerType {
 
     static func getType(tag: Int) -> MainMenu.CornerType? {
         MainMenu.CornerType.allCases.first(where: { $0.menuTag == tag })
