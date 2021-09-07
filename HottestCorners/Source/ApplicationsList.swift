@@ -18,23 +18,30 @@ final class ApplicationsList {
     ]
 
     var favoritesAppName: [String] { favoriteApps.filter({ apps.contains($0) }) }
-    var otherAppNames: [String] { apps.filter({ !favoriteApps.contains($0) }) }
+    var otherAppNames: [String] { apps.filter({ !favoriteApps.contains($0) && $0 != "HottestCorners" }) }
 
     private init() {}
 
     func update() {
-        guard let directory = FileManager.default.urls(
+        guard let systemAppDir = FileManager.default.urls(
             for: .applicationDirectory,
             in: .systemDomainMask
         ).first else {
             return
         }
-
-        apps = appsInDirectory(directory).sorted(by: {
-            $0.absoluteString.lowercased() < $1.absoluteString.lowercased()
-        }).compactMap({
-            $0.fileName
-        })
+        let systemApps = appsInDirectory(systemAppDir).compactMap({$0.fileName})
+                
+        guard let localAppDir = FileManager.default.urls(
+            for: .applicationDirectory,
+            in: .localDomainMask
+        ).first else {
+            return
+        }
+        let userApps = appsInDirectory(localAppDir).compactMap({$0.fileName})
+        
+        apps.append(contentsOf: systemApps)
+        apps.append(contentsOf: userApps)
+        apps.sort()
     }
 
     private func appsInDirectory(_ directory: URL) -> [URL] {
