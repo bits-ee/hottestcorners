@@ -48,7 +48,7 @@ private extension MainMenu {
 
     func addCornerMenuItem(cornerType: MainMenu.CornerType) {
         let item = addItem(
-            withTitle: cornerType.menuTitle,
+            withTitle: cornerType.menuTitle(appName: cornerType.applicationName),
             action: nil,
             keyEquivalent: ""
         )
@@ -146,17 +146,34 @@ extension MainMenu {
         case upperLeft
         case upperRight
 
-        var menuTitle: String {
+        private var emoji: String {
             switch self {
             case .lowerLeft:
-                return "⤦ Lower Left"
+                return "↙️"
             case .lowerRight:
-                return "⤥ Lower Right"
+                return "↘️"
             case .upperLeft:
-                return "⤣ Upper Left"
+                return "↖️"
             case .upperRight:
-                return "⤤ Upper Right"
+                return "↗️"
             }
+        }
+
+        private var defaultTitle: String {
+            switch self {
+            case .lowerLeft:
+                return "Lower Left"
+            case .lowerRight:
+                return "Lower Right"
+            case .upperLeft:
+                return "Upper Left"
+            case .upperRight:
+                return "Upper Right"
+            }
+        }
+
+        func menuTitle(appName: String? = nil) -> String {
+            emoji + " " + (appName ?? defaultTitle)
         }
 
         var menuTag: Int {

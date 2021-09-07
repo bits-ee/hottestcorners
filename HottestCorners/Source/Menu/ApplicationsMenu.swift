@@ -6,17 +6,21 @@ import ServiceManagement
 final class ApplicationsMenu: NSMenu {
 
     init(corner: MainMenu.CornerType) {
-        super.init(title: "ApplicationsMenu-\(corner.menuTitle)")
+        super.init(title: "ApplicationsMenu-\(corner.menuTitle())")
 
         addDoNothingItem()
         addSeparator()
 
         var selectedNothing = true
-        ApplicationsList.shared.listOfNames.forEach  {
+        ApplicationsList.shared.favoritesAppName.forEach  {
             addApplication(corner: corner, appName: $0)
             if corner.applicationName == $0 { selectedNothing = false }
         }
-        
+        addSeparator()
+        ApplicationsList.shared.otherAppNames.forEach  {
+            addApplication(corner: corner, appName: $0)
+            if corner.applicationName == $0 { selectedNothing = false }
+        }
         if selectedNothing {
             corner.removeApplication()
             item(at: 0)?.state = .on
@@ -76,6 +80,7 @@ private extension ApplicationsMenu {
         sender.state = .on
 
         MainMenu.CornerType.getType(tag: parentTag)?.saveApplication(name: sender.title)
+        StatusBarConfigurator.reloadMenu()
     }
     
     func setDoNothing(_ sender: NSMenuItem) {
@@ -92,13 +97,14 @@ private extension ApplicationsMenu {
         sender.state = .on
 
         MainMenu.CornerType.getType(tag: parentTag)?.removeApplication()
+        StatusBarConfigurator.reloadMenu()
     }
 
 }
 
 // MARK: - Corner type extension
 
-private extension MainMenu.CornerType {
+extension MainMenu.CornerType {
 
     static func getType(tag: Int) -> MainMenu.CornerType? {
         MainMenu.CornerType.allCases.first(where: { $0.menuTag == tag })
@@ -135,7 +141,7 @@ private extension MainMenu.CornerType {
         case .lowerLeft:
             UserDefaults.removeLowerLeftAppName()
         case .lowerRight:
-            UserDefaults.removeUpperLeftAppName()
+            UserDefaults.removeLowerRightAppName()
         case .upperLeft:
             UserDefaults.removeUpperLeftAppName()
         case .upperRight:
