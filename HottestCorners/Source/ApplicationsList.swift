@@ -9,8 +9,12 @@ final class ApplicationsList {
     private var apps: [String] = []
     private var favoriteApps = [
         "Calculator",
+        "Calendar",
+        "Mail",
+        "Notes",
+        "Reminders",
+        "Safari",
         "Terminal",
-        "Safari"
     ]
 
     var favoritesAppName: [String] { favoriteApps.filter({ apps.contains($0) }) }
@@ -19,7 +23,12 @@ final class ApplicationsList {
     private init() {}
 
     func update() {
-        let directory = FileManager.default.urls(for: .applicationDirectory, in: .systemDomainMask)[0]
+        guard let directory = FileManager.default.urls(
+            for: .applicationDirectory,
+            in: .systemDomainMask
+        ).first else {
+            return
+        }
 
         apps = appsInDirectory(directory).sorted(by: {
             $0.absoluteString.lowercased() < $1.absoluteString.lowercased()
@@ -38,10 +47,12 @@ final class ApplicationsList {
         ) else {
             return []
         }
+
         var appUrls = urls.filter({ $0.pathExtension == "app" })
         for newDirectory in urls.filter({ $0.pathExtension.isEmpty }) {
             appUrls.append(contentsOf: appsInDirectory(newDirectory))
         }
+        
         return appUrls
     }
 }

@@ -6,7 +6,7 @@ import ServiceManagement
 final class ApplicationsMenu: NSMenu {
 
     init(corner: MainMenu.CornerType) {
-        super.init(title: "ApplicationsMenu-\(corner.menuTitle)")
+        super.init(title: "ApplicationsMenu-\(corner.menuTitle())")
 
         addDoNothingItem()
         addSeparator()
