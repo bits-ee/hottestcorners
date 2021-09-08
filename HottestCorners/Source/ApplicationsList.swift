@@ -17,8 +17,9 @@ final class ApplicationsList {
         "Terminal",
     ]
 
+    var appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String 
     var favoritesAppName: [String] { favoriteApps.filter({ apps.contains($0) }) }
-    var otherAppNames: [String] { apps.filter({ !favoriteApps.contains($0) && $0 != "HottestCorners" }) }
+    var otherAppNames: [String] { apps.filter({ !favoriteApps.contains($0) && $0 != appName }) }
 
     private init() {}
 
