@@ -12,12 +12,12 @@ final class ApplicationsMenu: NSMenu {
         addSeparator()
 
         var selectedNothing = true
-        ApplicationsList.shared.favoritesAppName.forEach  {
+        ApplicationsList.shared.favoritesApps.forEach  {
             addApplication(corner: corner, appName: $0)
             if corner.applicationName == $0 { selectedNothing = false }
         }
         addSeparator()
-        ApplicationsList.shared.otherAppNames.forEach  {
+        ApplicationsList.shared.otherApps.forEach  {
             addApplication(corner: corner, appName: $0)
             if corner.applicationName == $0 { selectedNothing = false }
         }

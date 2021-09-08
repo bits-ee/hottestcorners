@@ -7,19 +7,22 @@ final class ApplicationsList {
     static let shared = ApplicationsList()
 
     private var apps: [String] = []
-    private var favoriteApps = [
+    private var favoriteAppNames = [
         "Calculator",
         "Calendar",
+        "Launchpad",
         "Mail",
+        "Mission Control",
         "Notes",
         "Reminders",
         "Safari",
-        "Terminal",
+        "Screenshot",
+        "Terminal"
     ]
 
-    var appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String 
-    var favoritesAppName: [String] { favoriteApps.filter({ apps.contains($0) }) }
-    var otherAppNames: [String] { apps.filter({ !favoriteApps.contains($0) && $0 != appName }) }
+    var appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
+    var favoritesApps: [String] { apps.filter({ favoriteAppNames.contains($0) }) }
+    var otherApps: [String] { apps.filter({ !favoriteAppNames.contains($0) && $0 != appName && !$0.contains("Uninstall")}) }
 
     private init() {}
 
@@ -39,7 +42,7 @@ final class ApplicationsList {
             return
         }
         let userApps = appsInDirectory(localAppDir).compactMap({$0.fileName})
-        
+        apps = []
         apps.append(contentsOf: systemApps)
         apps.append(contentsOf: userApps)
         apps.sort()
