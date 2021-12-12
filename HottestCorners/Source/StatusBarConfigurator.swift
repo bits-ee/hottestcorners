@@ -1,5 +1,3 @@
-//  Copyright © 2021 Baltic IT Solutions OÜ. All rights reserved.
-
 import Cocoa
 
 final class StatusBarConfigurator {

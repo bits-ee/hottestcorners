@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  HottestCornersHelper
-//
-//  Created by Zahhar Kirillov on 20.11.18.
-//  Copyright © 2018 Baltic IT Solutions OÜ. All rights reserved.
-//
-
 import Cocoa
 
 class HelperAppDelegate: NSObject, NSApplicationDelegate {

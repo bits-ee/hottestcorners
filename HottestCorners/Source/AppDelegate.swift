@@ -1,5 +1,3 @@
-//  Copyright © 2018 Baltic IT Solutions OÜ. All rights reserved.
-
 import Cocoa
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
