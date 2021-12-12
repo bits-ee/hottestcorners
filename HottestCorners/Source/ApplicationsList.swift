@@ -45,7 +45,7 @@ final class ApplicationsList {
         apps = []
         apps.append(contentsOf: systemApps)
         apps.append(contentsOf: userApps)
-        apps.sort()
+        apps.sort{$0.lowercased() < $1.lowercased()}
     }
 
     private func appsInDirectory(_ directory: URL) -> [URL] {

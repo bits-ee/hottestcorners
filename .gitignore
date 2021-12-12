@@ -1,5 +1,6 @@
 /Assets
 /Carthage
+.DS_Store
 
 ## From https://github.com/github/gitignore/blob/master/Global/Xcode.gitignore
 ## User settings
