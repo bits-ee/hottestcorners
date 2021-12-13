@@ -1,5 +1,3 @@
-//  Copyright © 2018 Baltic IT Solutions OÜ. All rights reserved.
-
 import Cocoa
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
@@ -12,8 +10,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillFinishLaunching(_ aNotification: Notification) {
 
         StatusBarConfigurator.updateIcon()
-        let menu = MainMenu()
-        StatusBarConfigurator.addMenu(menu)
+        StatusBarConfigurator.reloadMenu()
 
         mouseEventMonitor = NSEvent.addGlobalMonitorForEvents(
             matching: [NSEvent.EventTypeMask.mouseMoved],

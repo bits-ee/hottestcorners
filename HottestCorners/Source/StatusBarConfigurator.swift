@@ -1,5 +1,3 @@
-//  Copyright © 2021 Baltic IT Solutions OÜ. All rights reserved.
-
 import Cocoa
 
 final class StatusBarConfigurator {
@@ -18,7 +16,7 @@ final class StatusBarConfigurator {
         }
     }
 
-    static func addMenu(_ menu: NSMenu) {
+    static func reloadMenu() {
         item.menu = MainMenu()
     }
 
